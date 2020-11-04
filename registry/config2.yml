@@ -1,0 +1,25 @@
+version: 0.1
+loglevel: debug
+storage:
+  filesystem:
+    rootdirectory: /var/lib/registry
+  delete:
+    enabled: true
+http:
+  addr: :5000
+  tls:
+    certificate: /certs/ca.crt
+    key: /certs/ca.key
+auth:
+  token:
+    realm: https://52.230.99.163/v2/token
+    service: 52.230.99.163:5000
+    issuer: 52.230.99.163
+    rootcertbundle: /certs/ca.crt
+notifications:
+  endpoints:
+    - name: portus
+      url: https://52.230.99.163/v2/webhooks/events
+      timeout: 500ms
+      threshold: 5
+      backoff: 1s
