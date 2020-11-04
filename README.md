@@ -70,18 +70,22 @@ docker run -d --restart=always --name portus \
  -v /var/lib/registry/certs/server.key:/secrets/portus.key \
  -v /var/lib/registry/portus/config-local.yml:/srv/Portus/config/config-local.yml \
  --link mariadb:mariadb \
- -e MARIADB_SERVICE_HOST=mariadb \
- -e MARIADB_USER=portus \
- -e MARIADB_PASSWORD=portus \
- -e MARIADB_DATABASE=portus \
+ -e PORTUS_DB_HOST=mariadb \
+ -e PORTUS_DB_USERNAME=portus \
+ -e PORTUS_DB_PASSWORD=portus \
+ -e PORTUS_DB_DATABASE=portus \
+ -e PORTUS_KEY_PATH=/secrets/portus.key \
+ -e PORTUS_PUMA_TLS_KEY=/secrets/portus.key \
+ -e PORTUS_PUMA_TLS_CERT=/certificates/portus-ca.crt \
+ -e PORTUS_MACHINE_FQDN_VALUE=<ip or dns> \
  -e PORTUS_SECRET_KEY_BASE=$(openssl rand -hex 64) \
  -e PORTUS_PORTUS_PASSWORD=$(openssl rand -hex 64) \
  -p 443:443 \
  -p 80:80 \
-opensuse/portus:head
+opensuse/portus:2.4
 ```
 
-Switch `opensuse/portus:2.0` to `opensuse/portus:head` if you'd like to run the most recent build from GitHub.
+Switch `opensuse/portus:2.4` to `opensuse/portus:head` if you'd like to run the most recent build from GitHub.
 
 *Note:* if you used a different method to create the MariaDB database or provided a custom username/password, you need to replace the default values in this command.
 
