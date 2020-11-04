@@ -78,7 +78,7 @@ docker run -d --restart=always --name portus \
  -e PORTUS_PORTUS_PASSWORD=$(openssl rand -hex 64) \
  -p 443:443 \
  -p 80:80 \
-opensuse/portus:2.5
+opensuse/portus:head
 ```
 
 Switch `opensuse/portus:2.0` to `opensuse/portus:head` if you'd like to run the most recent build from GitHub.
